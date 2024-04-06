@@ -1,0 +1,16 @@
+{
+  "name": "blip",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server:install": "cd server && npm i",
+    "server:start": "cd server && npm run start",
+    "client:install": "cd client && npm i",
+    "client:dev": "cd client && npm run dev",
+    "client:start": "cd client && npm run start",
+    "install": "npm run server:install && npm run client:install"
+  },
+  "author": "",
+  "license": "ISC"
+}
