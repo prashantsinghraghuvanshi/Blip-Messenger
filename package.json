@@ -2,15 +2,28 @@
   "name": "blip",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "server:install": "cd server && npm i",
-    "server:start": "cd server && npm run start",
+    "server:start": "nodemon server/server.js",
     "client:install": "cd client && npm i",
     "client:dev": "cd client && npm run dev",
     "client:start": "cd client && npm run start",
     "install": "npm run server:install && npm run client:install"
   },
+  "type":"module",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.0",
+    "soket.io": "^0.0.1-security"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
 }
