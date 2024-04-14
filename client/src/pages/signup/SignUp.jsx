@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import GenderCheckbox from "./GenderCheckbox";
+import useSignup from "../../hooks/useSignup";
 
 export default function SignUp() {
   const [inputs, setInputs] = useState({
@@ -11,12 +12,15 @@ export default function SignUp() {
     gender: "",
   });
 
+  const { loading, signup } = useSignup();
+
   const handleCheckboxChange = (gender) => {
     setInputs({ ...inputs, gender });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    await signup(inputs);
   };
 
   return (
