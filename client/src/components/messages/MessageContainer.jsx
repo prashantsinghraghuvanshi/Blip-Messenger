@@ -1,6 +1,6 @@
 import MessageInput from "./MessageInput";
 import Messages from "./Messages";
-import { TiMessages } from "react-icons/ti";
+// import { TiMessages } from "react-icons/ti";
 
 export default function MessageContainer() {
   const noChatSelected = true;
@@ -31,7 +31,11 @@ const NoChatSelected = () => {
       <div className="px-4 text-center sm:text-xl md:text-xl text-gray-200 font-semibold flex flex-col items-center gap-2">
         <p>Welcome Prashant!</p>
         <p>Select a chat to start messaging 🫡</p>
-        <TiMessages className="text-3xl md:text-6xl text-center" />
+        <img
+          className="object-contain mt-4 h-60 w-100 items-center"
+          src="../../../assets/logo/svg/final-logo.svg"
+          alt="Blip Logo"
+        />
       </div>
     </div>
   );
