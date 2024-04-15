@@ -3,6 +3,7 @@ import { useState } from "react";
 
 const useSignup = () => {
   const [loading, setLoading] = useState(false);
+  // const [{} setAuthUser} = useState(false);
   const signup = async (
     fullName,
     userName,
@@ -23,7 +24,7 @@ const useSignup = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("need-server-api", {
+      const res = await fetch("http://localhost:8000/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -35,6 +36,13 @@ const useSignup = () => {
         }),
       });
       const data = await res.json();
+      
+			
+			if (data.error) {
+				throw new Error(data.error);
+			}
+			localStorage.setItem("chat-user", JSON.stringify(data));
+			setAuthUser(data);
     } catch (error) {
       toast.error(error.message);
     } finally {
