@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/AbhishekShaarmaa/Blip/issues"
   },
-  "homepage": "https://github.com/AbhishekShaarmaa/Blip#readme"
+  "homepage": "https://github.com/AbhishekShaarmaa/Blip#readme",
+  "dependencies": {
+    "cors": "^2.8.5"
+  }
 }

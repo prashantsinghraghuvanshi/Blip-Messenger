@@ -11,8 +11,8 @@ export default function SignUp() {
     confirmPassword: "",
     gender: "",
   });
-
-  const { loading, signup } = useSignup();
+  const { signup } = useSignup();
+  //console.log(signup);
 
   const handleCheckboxChange = (gender) => {
     setInputs({ ...inputs, gender });

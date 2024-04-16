@@ -5,7 +5,14 @@ const router  = express.Router();
 
 router.post('/login',login);
 router.get('/getuser' , getUser);
-router.post('/signup' , signup);
+router.post('/signup' , signup , async(req , res)=>{
+    try {
+        
+    } catch (error) {
+        console.log(error.message);
+        res.status(404).json({error:error.message})
+    }
+});
 router.post('/logout' , logout);
 
 export default router;
