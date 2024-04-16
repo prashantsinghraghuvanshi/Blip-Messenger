@@ -1,20 +1,22 @@
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { useAuthContext } from "../context/AuthContext";
 
 const useSignup = () => {
   const [loading, setLoading] = useState(false);
+  const { setAuthUser } = useAuthContext();
   const signup = async ({
-    fullName,
-    userName,
+    fullname,
+    username,
     password,
     confirmPassword,
     gender,
   }) => {
     console.log(13);
-    console.log([fullName, userName, password, confirmPassword, gender]);
+    console.log([fullname, username, password, confirmPassword, gender]);
     const success = handleInputErrors({
-      fullName,
-      userName,
+      fullname,
+      username,
       password,
       confirmPassword,
       gender,
@@ -32,17 +34,22 @@ const useSignup = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fullName,
-          userName,
+          fullname,
+          username,
           password,
           confirmPassword,
           gender,
         }),
       });
       const data = await res.json();
-      console.log(data);
+      if (data.error) {
+        throw new Error(data.error);
+      }
+      //localstorage to be returned from backend
+      localStorage.setItem("chat-user", JSON.stringify(data));
+      //auth context
+      setAuthUser(data);
     } catch (error) {
-      console.log(error.message);
       toast.error(error.message);
     } finally {
       setLoading(false);
@@ -55,15 +62,14 @@ const useSignup = () => {
 export default useSignup;
 
 function handleInputErrors({
-  fullName,
-  userName,
+  fullname,
+  username,
   password,
   confirmPassword,
   gender,
 }) {
-  console.log([fullName, userName, password, confirmPassword, gender]);
-  if (!fullName || !userName || !password || !confirmPassword || !gender) {
-    console.log("Please fill out all the entries");
+  console.log([fullname, username, password, confirmPassword, gender]);
+  if (!fullname || !username || !password || !confirmPassword || !gender) {
     toast.error("Please fill out all the entries");
 
     return false;
