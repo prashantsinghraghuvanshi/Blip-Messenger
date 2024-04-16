@@ -1,11 +1,13 @@
 import bcrypt from "bcryptjs";
 import genrateTokenAndSetCookie from "../utils/genrateTokens.js";
-import User from "../models/user.models.js";
+import User from "../models/user/user.models.js";
 
 export const signup = async (req, res) => {
+  console.log('client request accepted');
   try {
+    console.log('client request accepted by try');
     
-    const { fullName, username, password, confirmPassword, gender } = req.body;
+    const { fullName, userName, password, confirmPassword, gender } = req.body;
     
     // confirm password condition
     if (password !== confirmPassword) {
@@ -13,11 +15,11 @@ export const signup = async (req, res) => {
     }
     // finding user in database
 
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ userName });
     
-    // if username already exist
+    // if userName already exist
     if (user) {
-      return res.status(400).json({ error: "Username already exists" });
+      return res.status(400).json({ error: "userName already exists" });
     }
     
 
@@ -25,13 +27,13 @@ export const signup = async (req, res) => {
 		const salt = await bcrypt.genSalt(10);
 		const hashedPassword = await bcrypt.hash(password, salt);
     // getting rabndom user profile  from avatar.iran
-    const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
-    const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
+    const boyProfilePic = `https://avatar.iran.liara.run/public/boy?userName=${userName}`;
+    const girlProfilePic = `https://avatar.iran.liara.run/public/girl?userName=${userName}`;
 
     // creating user object
     const newUser = new User({
       fullName,
-      username,
+      userName,
       password : hashedPassword,
       gender,
       profilePic: gender === "male" ? boyProfilePic : girlProfilePic,
@@ -45,7 +47,7 @@ export const signup = async (req, res) => {
       res.status(201).json({
         status: "success",
         _id: newUser._id,
-        username : newUser.username,
+        userName : newUser.userName,
         password: newUser.password
       });
     }
@@ -54,21 +56,22 @@ export const signup = async (req, res) => {
       })
     }
   } catch (error) {
-
-    res.status(500).json({ error: "internet server error" });
+     console.log(req.body)
+    res.status(500).json({ error: "internal server error" ,
+  message:error.message });
   }
 };
 
 export const login = async (req, res) => {
   try {
-    const {username , password} = req.body;
-    const user  = await User.findOne({username})
+    const {userName , password} = req.body;
+    const user  = await User.findOne({userName})
     const isPasswordCorrect = await bcrypt.compare(password, user?.password );
 
     if(!user || !isPasswordCorrect)
     {
     
-       return res.status(404).json({error: 'incorrect username or password' ,
+       return res.status(404).json({error: 'incorrect userName or password' ,
       });
     }
 
@@ -76,7 +79,7 @@ export const login = async (req, res) => {
 
     res.json({
       _id: user._id,
-      username : user.username,
+      userName : user.userName,
       password: user.password,
       profilePic:user.profilePic
     })

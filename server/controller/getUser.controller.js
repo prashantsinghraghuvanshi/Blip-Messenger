@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import User from "../models/user.models.js";
+import User from "../models/user/user.models.js";
 
 
 const getUser = async (req,res)=>{
