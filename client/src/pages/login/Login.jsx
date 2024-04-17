@@ -6,18 +6,18 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { loading } = useLogin();
+  const { login, loading } = useLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await Login(username, password);
+    await login(username, password);
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
         <h1 className="text-3x1 font-semibold text-center text-gray-300">
-          Login
+          login
           <span className="text-lime-400"> @ Blip Messenger 💬</span>
         </h1>
         <form onSubmit={handleSubmit}>
@@ -57,7 +57,7 @@ export default function Login() {
               {loading ? (
                 <span className="loading loading-spinner"></span>
               ) : (
-                "Login"
+                "login"
               )}
             </button>
           </div>
