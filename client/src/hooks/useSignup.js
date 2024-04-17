@@ -6,17 +6,17 @@ const useSignup = () => {
   const [loading, setLoading] = useState(false);
   const { setAuthUser } = useAuthContext();
   const signup = async ({
-    fullname,
-    username,
+    fullName,
+    userName,
     password,
     confirmPassword,
     gender,
   }) => {
     console.log(13);
-    console.log([fullname, username, password, confirmPassword, gender]);
+    console.log([fullName, userName, password, confirmPassword, gender]);
     const success = handleInputErrors({
-      fullname,
-      username,
+      fullName,
+      userName,
       password,
       confirmPassword,
       gender,
@@ -34,8 +34,8 @@ const useSignup = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fullname,
-          username,
+          fullName,
+          userName,
           password,
           confirmPassword,
           gender,
@@ -62,14 +62,14 @@ const useSignup = () => {
 export default useSignup;
 
 function handleInputErrors({
-  fullname,
-  username,
+  fullName,
+  userName,
   password,
   confirmPassword,
   gender,
 }) {
-  console.log([fullname, username, password, confirmPassword, gender]);
-  if (!fullname || !username || !password || !confirmPassword || !gender) {
+  console.log([fullName, userName, password, confirmPassword, gender]);
+  if (!fullName || !userName || !password || !confirmPassword || !gender) {
     toast.error("Please fill out all the entries");
 
     return false;

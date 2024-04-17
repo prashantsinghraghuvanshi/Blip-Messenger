@@ -4,9 +4,9 @@ import { getRandomEmoji } from "../../utils/emojis";
 
 export default function Conversations() {
   const { loading, conversations } = useGetConversations();
+
   return (
     <div className="py-2 flex flex-col overflow-auto no-scrollbar">
-      {/* last index is for divider */}
       {conversations.map((conversation, idx) => (
         <Conversation
           key={conversation._id}
