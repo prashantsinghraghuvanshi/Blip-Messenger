@@ -24,7 +24,7 @@ export default function App() {
           element={authUser ? <Navigate to="/" /> : <SignUp />}
         />
       </Routes>
-      <Toaster />
+      <Toaster position="top-left" reverseOrder={false} />
     </div>
   );
 }
