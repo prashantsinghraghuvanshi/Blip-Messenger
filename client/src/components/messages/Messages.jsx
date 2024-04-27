@@ -2,9 +2,12 @@ import { useEffect, useRef } from "react";
 import Message from "./Message";
 import useGetMessages from "../../hooks/useGetMessages";
 import MessageSkeleton from "../skeletons/MessageSkeleton";
+import useListenMessages from "../../hooks/useListenMessages";
 
 export default function Messages() {
   const { messages, loading } = useGetMessages();
+  //real time message updation
+  useListenMessages();
   const lastMessageRef = useRef();
   //to automatically scroll to bottom when message is send
   useEffect(() => {
