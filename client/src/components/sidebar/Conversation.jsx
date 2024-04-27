@@ -1,3 +1,4 @@
+import { useSocketContext } from "../../context/SocketContext";
 import useConversation from "../../zustand/useConversation";
 
 export default function Conversation({ conversation, lastIdx, emoji }) {
@@ -5,6 +6,9 @@ export default function Conversation({ conversation, lastIdx, emoji }) {
   const { selectedConversation, setSelectedConversation } = useConversation();
   //to change background color
   const isSelected = selectedConversation?._id === conversation._id;
+  //to check online users
+  const { onlineUsers } = useSocketContext();
+  const isOnline = onlineUsers.includes(conversation._id);
 
   return (
     <>
@@ -14,7 +18,7 @@ export default function Conversation({ conversation, lastIdx, emoji }) {
         `}
         onClick={() => setSelectedConversation(conversation)}
       >
-        <div className="avatar online">
+        <div className={`avatar ${isOnline ? "online" : ""}`}>
           <div className="w-14 rounded-full">
             <img src={conversation.profilePic} alt="user avatar" />
           </div>
