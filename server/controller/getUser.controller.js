@@ -1,14 +1,33 @@
 import User from "../models/user/user.models.js";
+import Conversation from "../models/user/conversation.model.js";
 
 export const getUser = async (req, res) => {
   try {
-    const loggedInUser = req.user._id;
+    const loggedInUserId = req.user._id;
 
-    const filterUser = await User.find({ _id: { $ne: loggedInUser } }).select(
-      "-password"
-    );
+    
+    const conversations = await Conversation.find({
+      participants: { $in: [loggedInUserId] }
+    });
 
-    res.status(200).json(filterUser);
+    
+    let participantIds = [];
+    conversations.forEach(conversation => {
+      participantIds = participantIds.concat(conversation.participants);
+    });
+    const uniqueParticipantIds = [...new Set(participantIds)];
+
+    
+    const filteredParticipantIds = uniqueParticipantIds.filter(id => id.toString() !== loggedInUserId.toString());
+
+   
+    const usersIConversedWith = await User.find({ _id: { $in: filteredParticipantIds } }).select("-password");
+
+    res.status(200).json(usersIConversedWith);
+
+
+
+    
   } catch (error) {
     console.error("error in getUser : ", error.message);
     res.status(500).json({ error: "Internal server Error" });
