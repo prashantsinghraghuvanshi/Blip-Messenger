@@ -9,7 +9,6 @@ export default function Conversation({ conversation, lastIdx, emoji }) {
   //to check online users
   const { onlineUsers } = useSocketContext();
   const isOnline = onlineUsers.includes(conversation._id);
-  console.log(conversation._id)
 
   return (
     <>
