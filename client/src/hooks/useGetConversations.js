@@ -12,7 +12,6 @@ const useGetConversations = () => {
       try {
         const res = await fetch("/api/getUsers");
 
-        console.log(res.data);
         const data = await res.json();
         if (data.error) {
           throw new Error(data.error);
@@ -29,7 +28,7 @@ const useGetConversations = () => {
     };
     getConversations();
     //added a dependency here
-  }, [conversations]);
+  }, []);
 
   return { loading, conversations };
 };
