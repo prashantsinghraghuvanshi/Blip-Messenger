@@ -4,7 +4,7 @@ import { signup, login , getUser, logout } from "../controller/auth.controller.j
 const router  = express.Router();
 
 router.post('/login',login);
-router.get('/getuser' , getUser);
+router.get('/getUser' , getUser);
 router.post('/signup' , signup , async(req , res)=>{
     try {
         
