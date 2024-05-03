@@ -3,9 +3,9 @@ import genrateTokenAndSetCookie from "../utils/genrateTokens.js";
 import User from "../models/user/user.models.js";
 
 export const signup = async (req, res) => {
-  console.log("client request accepted");
+  // console.log("client request accepted");
   try {
-    console.log("client request accepted by try");
+    // console.log("client request accepted by try");
 
     const { fullName, userName, password, confirmPassword, gender } = req.body;
 
@@ -54,7 +54,7 @@ export const signup = async (req, res) => {
       res.status(201).json({ error: "invalid user data" });
     }
   } catch (error) {
-    console.log(req.body);
+    // console.log(req.body);
     res
       .status(500)
       .json({ error: "internal server error", message: error.message });
