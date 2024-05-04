@@ -17,8 +17,6 @@ const useGetConversations = () => {
           throw new Error(data.error);
         }
         //set data into conversation state
-        console.log("conversations : ", conversations, typeof conversations);
-
         setConversations(data);
       } catch (error) {
         toast.error(error.message);
