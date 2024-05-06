@@ -7,7 +7,7 @@ import { useAuthContext } from "../../context/AuthContext";
 
 export default function MessageContainer() {
   const { selectedConversation, setSelectedConversation } = useConversation();
-
+   
   useEffect(() => {
     //cleanup function
     return () => setSelectedConversation(null);
