@@ -45,7 +45,7 @@ const NoChatSelected = () => {
         <p>Select a chat to start messaging 🫡</p>
         <img
           className="object-contain mt-4 h-60 w-100 items-center"
-          src="../../../assets/logo/svg/final-logo.svg"
+          src="../../dist/assets/final-logo.svg"
           alt="Blip Logo"
         />
       </div>

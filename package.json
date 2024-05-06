@@ -4,14 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "server:install": "cd server && npm i",
-    "server:start": "nodemon server/server.js",
-    "client:install": "cd client && npm i",
-    "client:dev": "cd client && npm run dev",
-    "client:start": "cd client && npm run start",
-    "install": "npm run server:install && npm run client:install"
+    "server": "nodemon server/server.js",
+    "start": "node server/server.js",
+    "build": "npm install && npm install --prefix client && npm run build --prefix client"
   },
-  "type":"module",
+  "type": "module",
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -21,7 +18,7 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.3.0",
-    "soket.io": "^0.0.1-security"
+    "socket.io": "^4.7.4"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
