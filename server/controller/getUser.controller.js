@@ -4,34 +4,42 @@ import Conversation from "../models/user/conversation.model.js";
 export const getUser = async (req, res) => {
   // try {
   //   const loggedInUserId = req.user._id;
-
-    
+  
+  //   // Find conversations where the logged-in user participates
   //   const conversations = await Conversation.find({
-  //     participants: { $in: [loggedInUserId] }
-  //   });
-
-    
-  //   let participantIds = [];
+  //     participants: { $all: [loggedInUserId] },
+  //   }).sort({ updatedAt: -1 });
+  
+  //   const uniqueIdsSet = new Set();
+  
   //   conversations.forEach(conversation => {
-  //     participantIds = participantIds.concat(conversation.participants);
+  //     conversation.participants.forEach(id => {
+  //       // Convert ObjectId to string representation before adding to Set
+  //       uniqueIdsSet.add(id.toString());
+  //     });
   //   });
-  //   const uniqueParticipantIds = [...new Set(participantIds)];
-
-    
-  //   const filteredParticipantIds = uniqueParticipantIds.filter(id => id.toString() !== loggedInUserId.toString());
-
-   
-  //   const usersIConversedWith = await User.find({ _id: { $in: filteredParticipantIds } }).select("-password");
-
-  //   res.status(200).json(usersIConversedWith);
-
-
-
-    
+  
+  //   // Convert Set back to Array
+  //   const uniqueIdsArray = Array.from(uniqueIdsSet);
+  
+  //   console.log(uniqueIdsArray);
+  
+  //   // Fetch users corresponding to unique participant IDs
+  //   const usersMap = {};
+  //   const users = await User.find({ _id: { $in: uniqueIdsArray } });
+  //   users.forEach(user => usersMap[user._id.toString()] = user);
+  
+  //   // Arrange users in the same order as uniqueIdsArray
+  //   const orderedUsers = uniqueIdsArray.map(id => usersMap[id]);
+  
+  //   orderedUsers.forEach(user => console.log("users", user._id));
+  
+  //   res.status(200).json(orderedUsers);
   // } catch (error) {
-  //   console.error("error in getUser : ", error.message);
-  //   res.status(500).json({ error: "Internal server Error" });
+  //   console.error("Error in getUser controller: ", error.message);
+  //   res.status(500).json({ error: "Internal server error" });
   // }
+  
 
   try {
 		const loggedInUserId = req.user._id;
