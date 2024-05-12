@@ -18,8 +18,10 @@ const useGetMessages = () => {
           console.log("16", data);
         }
         if (data.error) throw new Error(data.error);
-        setMessages(data);
+        console.log(data);
+        if (data.status !== "fail") setMessages([...data]);
       } catch (error) {
+        console.log(error);
         toast.error(error.message);
       } finally {
         setLoading(false);
