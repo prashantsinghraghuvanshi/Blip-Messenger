@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useConversation from "../zustand/useConversation";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 
 const useGetMessages = () => {
   const [loading, setLoading] = useState(false);
@@ -15,7 +15,8 @@ const useGetMessages = () => {
         if (data.error) throw new Error(data.error);
         setMessages(data);
       } catch (error) {
-        toast.error(error.message);
+        setMessages([]);
+        // toast.error(error.message);
       } finally {
         setLoading(false);
       }

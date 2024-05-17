@@ -63,7 +63,7 @@ try {
 
     console.log(conversation);
 
-    if (!conversation) return res.status(200).json({status:"fail"});
+    // if (!conversation) return res.status(200).json({status:"fail"});
     
     const messages = conversation.messages;
 
