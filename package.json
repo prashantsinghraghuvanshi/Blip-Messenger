@@ -1,6 +1,6 @@
 {
-  "name": "blip",
-  "version": "1.0.0",
+  "name": "blip-messenger",
+  "version": "1.1.04",
   "description": "",
   "main": "server.js",
   "scripts": {
@@ -18,7 +18,11 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.3.0",
-    "socket.io": "^4.7.4"
+<<<<<<< HEAD
+    "socket.io": "^0.0.1-security"
+=======
+    "socket.io": "^4.7.5"
+>>>>>>> upstream/main
   },
   "devDependencies": {
     "nodemon": "^3.1.0"

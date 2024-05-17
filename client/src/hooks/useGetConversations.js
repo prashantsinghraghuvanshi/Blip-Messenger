@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 const useGetConversations = () => {
   const [loading, setLoading] = useState(false);
   const [conversations, setConversations] = useState([]);
-
+  
   //fetching conversation data from api
   useEffect(() => {
     const getConversations = async () => {
