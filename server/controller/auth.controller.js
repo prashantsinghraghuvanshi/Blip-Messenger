@@ -28,7 +28,7 @@ export const signup = async (req, res) => {
     // getting rabndom user profile  from avatar.iran
     // const boyProfilePic = `https://avatar.iran.liara.run/public/boy?userName=${userName}`;
     // const girlProfilePic = `https://avatar.iran.liara.run/public/girl?userName=${userName}`;
-    const ProfilePic = `https://api.multiavatar.com/Binx Bond.svg`
+    const ProfilePic = `https://api.multiavatar.com/${userName}.svg`
     
 
     // creating user object
