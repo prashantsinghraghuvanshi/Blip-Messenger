@@ -3,11 +3,13 @@ import { IoSearchSharp } from "react-icons/io5";
 import useConversation from "../../zustand/useConversation";
 import useGetConversations from "../../hooks/useGetConversations";
 import toast from "react-hot-toast";
+import useGetGlobalUsers from "../../hooks/useGetGlobalUsers";
 
 export default function SearchInput() {
   const [search, setSearch] = useState("");
-  const { setSelectedConversation } = useConversation();
+  const { setSelectedConversation, selectFriends } = useConversation();
   const { conversations } = useGetConversations();
+  const { allUsers } = useGetGlobalUsers();
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!search) return;
@@ -18,7 +20,7 @@ export default function SearchInput() {
     }
 
     //implement search algo to select conversation
-    const conversation = conversations.find((c) =>
+    const conversation = (selectFriends ? conversations : allUsers).find((c) =>
       c.fullName.toLowerCase().includes(search.toLowerCase())
     );
 
@@ -35,7 +37,9 @@ export default function SearchInput() {
     <form onSubmit={handleSubmit} className="flex items-center gap-2">
       <input
         type="text"
-        placeholder="Search..."
+        placeholder={
+          selectFriends ? "Global Search..." : "Search from friends..."
+        }
         className="input input-bordered rounded-full"
         value={search}
         onChange={(e) => setSearch(e.target.value)}

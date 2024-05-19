@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import genrateTokenAndSetCookie from "../utils/genrateTokens.js";
+import generateTokenAndSetCookie from "../utils/generateTokens.js";
 import User from "../models/user/user.models.js";
 
 export const signup = async (req, res) => {
@@ -40,7 +40,7 @@ export const signup = async (req, res) => {
 
     // user doees not exist already then save it to database
     if (newUser) {
-      genrateTokenAndSetCookie(newUser._id, res);
+      generateTokenAndSetCookie(newUser._id, res);
       await newUser.save();
 
       res.status(201).json({
@@ -71,7 +71,7 @@ export const login = async (req, res) => {
       return res.status(404).json({ error: "incorrect userName or password" });
     }
 
-    genrateTokenAndSetCookie(user._id, res);
+    generateTokenAndSetCookie(user._id, res);
 
     res.json({
       _id: user._id,
@@ -81,6 +81,7 @@ export const login = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ error: "internet server error" });
+    console.log("error", error.message);
   }
 };
 export const logout = async (req, res) => {
