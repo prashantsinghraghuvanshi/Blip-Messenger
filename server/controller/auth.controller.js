@@ -26,8 +26,10 @@ export const signup = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
     // getting rabndom user profile  from avatar.iran
-    const boyProfilePic = `https://avatar.iran.liara.run/public/boy?userName=${userName}`;
-    const girlProfilePic = `https://avatar.iran.liara.run/public/girl?userName=${userName}`;
+    // const boyProfilePic = `https://avatar.iran.liara.run/public/boy?userName=${userName}`;
+    // const girlProfilePic = `https://avatar.iran.liara.run/public/girl?userName=${userName}`;
+    const ProfilePic = `https://api.multiavatar.com/Binx Bond.svg`
+    
 
     // creating user object
     const newUser = new User({
@@ -35,7 +37,7 @@ export const signup = async (req, res) => {
       userName,
       password: hashedPassword,
       gender,
-      profilePic: gender === "male" ? boyProfilePic : girlProfilePic,
+      profilePic: ProfilePic,
     });
 
     // user doees not exist already then save it to database
