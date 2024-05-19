@@ -30,11 +30,9 @@ export default function App() {
       </div>
       <div className="footer bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0 fixed bottom-0 w-full">
         <p>Copyright &copy; 2024 Blip Messenger, Inc.</p>
-        <div className="flex justify-end items-end">
-          <TfiLocationPin />
-          <p>Jaipur, India</p>
-        </div>
       </div>
+      <TfiLocationPin />
+      <p>Jaipur, India</p>
     </>
   );
 }
