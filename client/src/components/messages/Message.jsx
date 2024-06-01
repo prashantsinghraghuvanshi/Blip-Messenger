@@ -11,7 +11,7 @@ export default function Message({ message }) {
   const profilePic = fromMe
     ? authUser.profilePic
     : selectedConversation?.profilePic;
-  const bubbleBgColor = fromMe ? "bg-orange-600" : "";
+  const bubbleBgColor = fromMe ? "bg-green-500" : "";
 
   const shakeClass = message.shouldShake ? "shake" : "";
 
