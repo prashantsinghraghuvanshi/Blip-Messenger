@@ -19,6 +19,8 @@
   "homepage": "https://github.com/AbhishekShaarmaa/Blip#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "nodemailer": "^6.9.13",
+    "nodemailer-smtp-transport": "^2.7.4",
     "socket.io": "^4.7.5"
   }
 }
