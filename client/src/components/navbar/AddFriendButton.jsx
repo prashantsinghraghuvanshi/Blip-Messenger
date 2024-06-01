@@ -13,7 +13,7 @@ export default function AddFriendButton() {
   };
 
   return (
-    <div className="mt-auto">
+    <div className="my-auto">
       <IoPersonAddOutline
         className="w-6 h-6 text-white cursor-pointer"
         onClick={handleSubmit}
