@@ -23,12 +23,12 @@ export const signup = async (req, res) => {
     }
      
     // checking for existing email addreeses
-    const existingUserEmail = await User.findOne({email});
-    if (existingUserEmail) {
-      return res
-        .status(400)
-        .json({ error: "User with this email already exists" });
-    }
+    // const existingUserEmail = await User.findOne({email});
+    // if (existingUserEmail) {
+    //   return res
+    //     .status(400)
+    //     .json({ error: "User with this email already exists" });
+    // }
 
 
     const salt = await bcrypt.genSalt(10);
@@ -84,6 +84,8 @@ export const login = async (req, res) => {
   try {
     const { userName, password } = req.body;
     const user = await User.findOne({ userName });
+    const user_Id = user._id;
+    console.log(user_Id)
 
     if (!user) {
       return res.status(404).json({ error: "Incorrect username or password" });
