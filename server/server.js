@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 5001;
 
 const __dirname = path.resolve();
 
-app.use(express.json()); // to parse the incoming request with json payloads from req.body
+app.use(express.json());
 app.use(cookieParser());
 
 //routes
