@@ -34,7 +34,7 @@ export default function App() {
         <Toaster position="top-left" reverseOrder={false} />
       </div>
       <div className="footer bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0 fixed bottom-0 w-full">
-        <p>Copyright &copy; 2024 Blip Messenger, Inc.</p>
+        <p> &copy; 2024 Blip Messenger, Inc.</p>
       </div>
       <TfiLocationPin />
       <p>Jaipur, India</p>
