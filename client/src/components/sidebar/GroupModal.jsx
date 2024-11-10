@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
-import { IoSearchSharp } from "react-icons/io5";
+// import { IoSearchSharp } from "react-icons/io5";
 // import { FaPlus } from "react-icons/fa";
 import useGetConversations from "../../hooks/useGetConversations";
 
@@ -8,7 +8,17 @@ export default function GroupModal({ isOpen, onClose }) {
   const [groupName, setGroupName] = useState("");
   // const [participants, setParticipants] = useState();
   const { conversations } = useGetConversations();
-  console.log("9", conversations);
+  // console.log("9", conversations[0].__id);
+  const [selected, setSelected] = useState([]);
+  console.log("13", selected);
+  const count = selected.length;
+  const toggleSelection = (_id) => {
+    setSelected((prevSelected_ids) =>
+      prevSelected_ids.includes(_id)
+        ? prevSelected_ids.filter((selected_id) => selected_id !== _id)
+        : [...prevSelected_ids, _id]
+    );
+  };
 
   const handleCreateGroup = () => {
     onClose();
@@ -17,7 +27,7 @@ export default function GroupModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center  z-50 p-4">
       {/* Set fixed height to modal, 70% of screen height */}
       <div className="bg-gray-800 text-white rounded-lg shadow-xl w-full max-w-md h-[70vh]">
         <div className="flex justify-between items-center p-4 border-b border-gray-700">
@@ -35,7 +45,7 @@ export default function GroupModal({ isOpen, onClose }) {
           <div className="mb-6">
             <label
               htmlFor="groupName"
-              className="block text-sm font-medium text-gray-300 mb-2"
+              className="block text-lg font-semibold text-left mb-2"
             >
               Group Name
             </label>
@@ -51,8 +61,11 @@ export default function GroupModal({ isOpen, onClose }) {
 
           {/* Select Group Members */}
           <div className="flex flex-col items-center justify-center gap-4 w-full mb-4">
-            <div className="w-full text-lg font-semibold text-left">
-              Select Group Members
+            <div className="flex flex-row  w-full">
+              <div className="flex w-full text-lg font-semibold text-left">
+                Select Group Members
+              </div>
+              <div className="flex">{count}/50</div>
             </div>
 
             {/* Search bar component */}
@@ -67,14 +80,19 @@ export default function GroupModal({ isOpen, onClose }) {
           </div>
 
           {/* Friend list component */}
-          <div className="overflow-y-auto w-full max-h-[200px]">
+          <div className="overflow-y-auto w-full  max-h-[200px]">
             {conversations.map((item) => (
-              <div
-                key={item.id}
-                className="flex items-center gap-4 p-2 hover:bg-gray-700 rounded-md"
+              <button
+                key={item._id}
+                className={`flex items-center w-full gap-4 p-2 mb-3 hover:bg-gray-700 rounded-md ${
+                  selected.includes(item._id)
+                    ? "bg-green-500 hover:bg-green-500 "
+                    : "bg-transparent hover:bg-gray-700 "
+                }`}
+                onClick={() => toggleSelection(item._id)}
               >
                 {/* Profile picture */}
-                <div className="w-12 h-12 rounded-full overflow-hidden">
+                <div className="w-12 h-12 rounded-full overflow-h_idden">
                   <img
                     src={item.profilePic}
                     alt="user avatar"
@@ -83,25 +101,31 @@ export default function GroupModal({ isOpen, onClose }) {
                 </div>
 
                 {/* User info */}
-                <div className="flex flex-col flex-1">
-                  <p className="font-bold text-gray-200">{item.fullName}</p>
+                <div className="flex flex-col items-start flex-1">
+                  <p className="font-bold  text-gray-200">{item.fullName}</p>
                   {/* Add additional details if needed */}
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
 
         {/* Modal footer */}
-        <div className="flex justify-end items-center p-4 border-t  border-gray-700">
+        <div className="flex justify-end items-center mt-2 pt-2 pr-2 border-t  border-gray-700">
           <button
-            onClick={onClose}
+            onClick={() => {
+              onClose();
+              setSelected([]);
+            }}
             className="px-4 py-2 text-gray-400 hover:text-gray-300 mr-2 "
           >
             Cancel
           </button>
           <button
-            onClick={handleCreateGroup}
+            onClick={() => {
+              handleCreateGroup();
+              setSelected([]);
+            }}
             className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
           >
             Create Group
