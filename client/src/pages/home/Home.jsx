@@ -7,6 +7,7 @@ export default function Home() {
     <div className="fixed flex h-screen sm:h-[450px] md:h-[550px] rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
       <Navbar className="pl-10" />
       <Sidebar />
+
       <MessageContainer />
     </div>
   );

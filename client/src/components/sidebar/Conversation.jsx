@@ -2,11 +2,8 @@ import { useSocketContext } from "../../context/SocketContext";
 import useConversation from "../../zustand/useConversation";
 
 export default function Conversation({ conversation, lastIdx, emoji }) {
-  //zustand state to check for selected conversation
   const { selectedConversation, setSelectedConversation } = useConversation();
-  //to change background color
   const isSelected = selectedConversation?._id === conversation._id;
-  //to check online users
   const { onlineUsers } = useSocketContext();
   const isOnline = onlineUsers.includes(conversation._id);
 
