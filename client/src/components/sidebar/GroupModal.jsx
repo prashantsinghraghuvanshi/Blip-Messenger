@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
-import { FaPlus } from "react-icons/fa";
+import { IoSearchSharp } from "react-icons/io5";
+// import { FaPlus } from "react-icons/fa";
+import useGetConversations from "../../hooks/useGetConversations";
 
 export default function GroupModal({ isOpen, onClose }) {
   const [groupName, setGroupName] = useState("");
-  const [participants, setParticipants] = useState(["John Doe", "Jane Smith"]);
+  // const [participants, setParticipants] = useState();
+  const { conversations } = useGetConversations();
+  console.log("9", conversations);
 
   const handleCreateGroup = () => {
     onClose();
@@ -14,8 +18,9 @@ export default function GroupModal({ isOpen, onClose }) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-      <div className="bg-gray-800 text-white rounded-lg shadow-xl w-full max-w-md">
-        <div className="flex justify-between items-center p-6 border-b border-gray-700">
+      {/* Set fixed height to modal, 70% of screen height */}
+      <div className="bg-gray-800 text-white rounded-lg shadow-xl w-full max-w-md h-[70vh]">
+        <div className="flex justify-between items-center p-4 border-b border-gray-700">
           <h2 className="text-xl font-semibold">Create New Group</h2>
           <button
             onClick={onClose}
@@ -25,8 +30,9 @@ export default function GroupModal({ isOpen, onClose }) {
           </button>
         </div>
 
-        <div className="p-6">
-          <div className="mb-4">
+        <div className="p-6 h-[calc(100%-130px)]">
+          {/* Group Name */}
+          <div className="mb-6">
             <label
               htmlFor="groupName"
               className="block text-sm font-medium text-gray-300 mb-2"
@@ -43,40 +49,54 @@ export default function GroupModal({ isOpen, onClose }) {
             />
           </div>
 
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-300 mb-2">
-              Participants
-            </label>
-            <div className="flex flex-wrap gap-2">
-              {participants.map((participant, index) => (
-                <span
-                  key={index}
-                  className="bg-gray-700 text-gray-300 text-sm px-2 py-1 rounded-full flex items-center"
-                >
-                  {participant}
-                  <button
-                    onClick={() =>
-                      setParticipants(
-                        participants.filter((_, i) => i !== index)
-                      )
-                    }
-                    className="ml-1 text-gray-500 hover:text-gray-400"
-                  >
-                    <RxCross2 className="w-4 h-4" />
-                  </button>
-                </span>
-              ))}
-              <button className="text-green-500 hover:text-green-400">
-                <FaPlus className="w-5 h-5" />
-              </button>
+          {/* Select Group Members */}
+          <div className="flex flex-col items-center justify-center gap-4 w-full mb-4">
+            <div className="w-full text-lg font-semibold text-left">
+              Select Group Members
             </div>
+
+            {/* Search bar component */}
+            <div className="w-full flex gap-2">
+              <input
+                type="text"
+                placeholder="Search Users"
+                className=" pl-5  bg-gray-900 h-9 rounded-2xl w-full border border-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+                // onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
+          </div>
+
+          {/* Friend list component */}
+          <div className="overflow-y-auto w-full max-h-[200px]">
+            {conversations.map((item) => (
+              <div
+                key={item.id}
+                className="flex items-center gap-4 p-2 hover:bg-gray-700 rounded-md"
+              >
+                {/* Profile picture */}
+                <div className="w-12 h-12 rounded-full overflow-hidden">
+                  <img
+                    src={item.profilePic}
+                    alt="user avatar"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* User info */}
+                <div className="flex flex-col flex-1">
+                  <p className="font-bold text-gray-200">{item.fullName}</p>
+                  {/* Add additional details if needed */}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className="flex justify-end items-center p-6 border-t border-gray-700">
+        {/* Modal footer */}
+        <div className="flex justify-end items-center p-4 border-t  border-gray-700">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-gray-400 hover:text-gray-300 mr-2"
+            className="px-4 py-2 text-gray-400 hover:text-gray-300 mr-2 "
           >
             Cancel
           </button>
