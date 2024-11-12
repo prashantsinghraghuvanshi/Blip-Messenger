@@ -1,5 +1,7 @@
 import { LiaUserFriendsSolid } from "react-icons/lia";
 import useConversation from "../../zustand/useConversation";
+// import {useDispatch} from 'react-redux';
+// import { setSidebarStatus } from "../../store/viewSlice";
 
 export default function FriendsButton() {
   const { selectFriends, setSelectFriends, setSelectedConversation } =
