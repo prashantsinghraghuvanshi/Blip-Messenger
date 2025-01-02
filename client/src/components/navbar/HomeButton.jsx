@@ -11,9 +11,9 @@ export default function LogoutButton() {
   };
 
   return (
-    <div className="mt-auto">
+    <div>
       <FaHome
-        className="w-6 h-6 text-white cursor-pointer"
+        className="h-6 w-8 text-white cursor-pointer"
         onClick={handleSubmit}
       />
     </div>
