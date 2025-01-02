@@ -1,6 +1,6 @@
 import Conversations from "./Conversations";
-
 import SearchInput from "./SearchInput";
+
 export default function Sidebar() {
   return (
     <div className="w-[20rem] border-r border-slate-500 flex flex-col ">
