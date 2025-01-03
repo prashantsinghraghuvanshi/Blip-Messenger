@@ -36,7 +36,7 @@ export default function SearchInput() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex items-center justify-between w-full h-full px-4"
+      className="flex items-center justify-between border border-gray-700 p-2"
     >
       <input
         type="text"
