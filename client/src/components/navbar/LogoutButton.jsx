@@ -8,6 +8,7 @@ export default function LogoutButton() {
       <BiLogOut
         className="w-8 h-8 text-white cursor-pointer"
         onClick={logout}
+        title="Logout"
       />
     </div>
   );
